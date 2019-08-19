@@ -121,8 +121,7 @@ int main(int argc, char *argv[])
 
 	
 	/* Clock information */
-	clock_t start, end;
-	double cpu_time_used;
+	double start, end;
 
 	if (rank == 0){
 		FILE * fp;
@@ -139,17 +138,19 @@ int main(int argc, char *argv[])
 		printf("Computing Mandelbrot Set. Please wait...\n");
 		
 		// Get current clock time.
-		start = clock();
+		start = MPI_Wtime();
 
 		static unsigned char ppm[iXmax * 3 * iYmax];
 		double Cy_Ar[sizeof(double) * iYmax];
-		int newI = 0;
+		const float DIVISION_FACTOR = 0.85;
+		int lowerI = 0;
+		int upperI = iYmax / 2 * DIVISION_FACTOR;
 		int stopCount = 0;
 
 		// printf("\n\n%lu\n",sizeof(Cy_Ar));
 
 		/* compute and write image data bytes to the file */
-		for(iY = 0; iY < iYmax; iY++)
+		for(iY = 0; iY < iYmax / 2; iY++)
 		{	
 			// printf("Started Row %i.\n",iY);
 			Cy_Ar[iY] = CyMin + (iY * PixelHeight);
@@ -164,9 +165,14 @@ int main(int argc, char *argv[])
 		// Resetting all
 		for(int i=1; i<numtasks; i++){
 			MPI_Recv(&rowStruct, 1, RSTRUCT, i , 0, MPI_COMM_WORLD, &stat);
-
-			CyStruct.rowIndex = newI;
-			CyStruct.Cy_Send = Cy_Ar[newI];
+			
+			if (i < numtasks / 2) {
+				CyStruct.rowIndex = lowerI;
+				CyStruct.Cy_Send = Cy_Ar[lowerI];
+			}else{
+				CyStruct.rowIndex = upperI;
+				CyStruct.Cy_Send = Cy_Ar[upperI];
+			}
 			
 			MPI_Send(&CyStruct, 1, CSTRUCT, i, 0, MPI_COMM_WORLD);
 		}
@@ -175,24 +181,52 @@ int main(int argc, char *argv[])
 		
 		while (1){
 			MPI_Recv(&rowStruct, 1, RSTRUCT, MPI_ANY_SOURCE , 0, MPI_COMM_WORLD, &stat);
-			for (int t = 0;t<iXmax * 3;t++){ 
-				ppm[(rowStruct.rowIndex * iXmax * 3) + t] = rowStruct.row_color[t];
+			// printf("stopCount ; %i\n",stopCount);
+			for (int t = 0;t < (iXmax) * 3;t++){ 
+
+				// printf("Upper : %i \t Lower : %i \n", upperIndex, lowerIndex);
+				ppm[ (rowStruct.rowIndex * iXmax * 3) + t ] = rowStruct.row_color[t];
+				ppm[ ((iXmax - rowStruct.rowIndex - 1) * iXmax * 3) + t ] = rowStruct.row_color[t];
+				
 			}
-			
-			CyStruct.rowIndex = newI;
-			CyStruct.Cy_Send = Cy_Ar[newI];
-			newI += 1;
-			if (newI > iYmax){
-				stopCount += 1;
-				CyStruct.rowIndex = iYmax + 1 ;
-				MPI_Send(&CyStruct, 1, CSTRUCT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
-				if (stopCount == numtasks - 1){
-					break;
+			// Assigning task to the top half of the cores
+			// printf("rank: %i\n", stat.MPI_SOURCE);
+			if (stat.MPI_SOURCE < numtasks / 2) {
+				CyStruct.rowIndex = lowerI;
+				CyStruct.Cy_Send = Cy_Ar[lowerI];
+				lowerI += 1;
+				// printf("LowerI ; %i\n",lowerI);
+				if (lowerI > (iYmax / 2) * DIVISION_FACTOR){
+					stopCount += 1;
+					CyStruct.rowIndex = iYmax + 1 ;
+					MPI_Send(&CyStruct, 1, CSTRUCT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
+					if (stopCount == numtasks - 1){
+						break;
+					}
+					continue;
 				}
-				continue;
+				MPI_Send(&CyStruct, 1, CSTRUCT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
+
+			}else{
+				CyStruct.rowIndex = upperI;
+				CyStruct.Cy_Send = Cy_Ar[upperI];
+				upperI += 1;
+				// printf("UpperI ; %i\n",upperI);
+				// printf("rank: %i\n", stat.MPI_SOURCE);
+				
+				if (upperI > (iYmax / 2)){
+					stopCount += 1;
+					CyStruct.rowIndex = iYmax + 1 ;
+					MPI_Send(&CyStruct, 1, CSTRUCT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
+					if (stopCount == numtasks - 1){
+						break;
+					}
+					continue;
+				}
+				MPI_Send(&CyStruct, 1, CSTRUCT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
+
 			}
 
-			MPI_Send(&CyStruct, 1, CSTRUCT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
 			
 
 		}
@@ -203,9 +237,10 @@ int main(int argc, char *argv[])
 		
 		// Get the clock current time again
 		// Subtract end from start to get the CPU time used.
-		end = clock();
-		cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+		// end = clock();
+		// cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
+		end = MPI_Wtime(); 
 
 		fclose(fp);
 
@@ -215,7 +250,8 @@ int main(int argc, char *argv[])
 
 		printf("Completed Computing Mandelbrot Set.\n");
 		printf("File: %s successfully closed.\n", filename);
-		printf("Mandelbrot computational process time: %lf\n", cpu_time_used);
+		printf( "Mandelbrot computational process time %f\n", end - start ); 
+		// printf("Mandelbrot computational process time: %lf\n", cpu_time_used);
 		MPI_Finalize();
 		return 0;
 
