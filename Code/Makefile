@@ -7,7 +7,7 @@ mandelbrot_parallel : mandelbrot_parallel.c
 	mpicc -o mandelbrot_parallel mandelbrot_parallel.c
 
 run:
-	mpirun -np 4 mandelbrot_parallel
+	mpirun -np 8 mandelbrot_parallel
 
 clean :
 	/bin/rm -f mandelbrot_serial *.o
