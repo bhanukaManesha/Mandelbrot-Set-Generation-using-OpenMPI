@@ -67,73 +67,57 @@ int main(int argc, char *argv[])
 
 
 	// Custom Datatype Definition
-	// struct {
-    //     int rowIndex;
-    //     unsigned char row_color[iXmax * 3];
-    // } rowStruct;
+	struct {
+        int rowIndex;
+        unsigned char row_color[iXmax * 3];
+    } rowStruct;
 
-	// struct {
-    //     int rowIndex;
-    //     double Cy_Send;
-    // } CyStruct;
+	struct {
+        int rowIndex;
+        double Cy_Send;
+    } CyStruct;
 
-	// int blocklengths_R[2];
-	// int blocklengths_C[2];
-    // MPI_Aint pos_R[2];
-	// MPI_Aint pos_S[2];
+	int blocklengths_R[2];
+	int blocklengths_C[2];
+    MPI_Aint pos_R[2];
+	MPI_Aint pos_S[2];
 
-	// MPI_Datatype RSTRUCT;
-	// MPI_Datatype CSTRUCT;
-    // MPI_Datatype old_types_R[2];
-	// MPI_Datatype old_types_S[2];
+	MPI_Datatype RSTRUCT;
+	MPI_Datatype CSTRUCT;
+    MPI_Datatype old_types_R[2];
+	MPI_Datatype old_types_S[2];
 
-	// blocklengths_R[0] = 1;
-    // blocklengths_R[1] = iXmax * 3;
-	// blocklengths_C[0] = 1;
-    // blocklengths_C[1] = 1;
-
-
-    // old_types_R[0] = MPI_INT;
-    // old_types_R[1] = MPI_UNSIGNED_CHAR;
-	// old_types_S[0] = MPI_INT;
-    // old_types_S[1] = MPI_DOUBLE;
+	blocklengths_R[0] = 1;
+    blocklengths_R[1] = iXmax * 3;
+	blocklengths_C[0] = 1;
+    blocklengths_C[1] = 1;
 
 
-    // MPI_Get_address( &rowStruct.rowIndex, &pos_R[0] );
-    // MPI_Get_address( &rowStruct.row_color, &pos_R[1] );
-
-    // pos_R[1] = pos_R[1] - pos_R[0];
-    // pos_R[0] = 0;
-
-	// MPI_Get_address( &CyStruct.rowIndex, &pos_S[0] );
-    // MPI_Get_address( &CyStruct.Cy_Send, &pos_S[1] );
-
-    // pos_S[1] = pos_S[1] - pos_S[0];
-    // pos_S[0] = 0;
-
-    // MPI_Type_create_struct(2, blocklengths_R,pos_R,old_types_R,&RSTRUCT);
-	// MPI_Type_create_struct(2, blocklengths_C,pos_S,old_types_S,&CSTRUCT);
-
-    // MPI_Type_commit( &RSTRUCT );
-	// MPI_Type_commit( &CSTRUCT );
-
-	// // End Custom Datatype Definition
-
-	// Pack Buffer
-	int position;
-	const int c_packsize = sizeof(double) + sizeof(int);
-	const int row_packsize = sizeof(unsigned char) * iYmax * 3 + sizeof(int);
-    char c_packbuf[c_packsize];
-	char row_packbuf[row_packsize];
-
-	int rowLength = sizeof(unsigned char) * iYmax * 3;
+    old_types_R[0] = MPI_INT;
+    old_types_R[1] = MPI_UNSIGNED_CHAR;
+	old_types_S[0] = MPI_INT;
+    old_types_S[1] = MPI_DOUBLE;
 
 
-	int row_i;
-	unsigned char row_color[iXmax * 3];
+    MPI_Get_address( &rowStruct.rowIndex, &pos_R[0] );
+    MPI_Get_address( &rowStruct.row_color, &pos_R[1] );
 
+    pos_R[1] = pos_R[1] - pos_R[0];
+    pos_R[0] = 0;
 
+	MPI_Get_address( &CyStruct.rowIndex, &pos_S[0] );
+    MPI_Get_address( &CyStruct.Cy_Send, &pos_S[1] );
 
+    pos_S[1] = pos_S[1] - pos_S[0];
+    pos_S[0] = 0;
+
+    MPI_Type_create_struct(2, blocklengths_R,pos_R,old_types_R,&RSTRUCT);
+	MPI_Type_create_struct(2, blocklengths_C,pos_S,old_types_S,&CSTRUCT);
+
+    MPI_Type_commit( &RSTRUCT );
+	MPI_Type_commit( &CSTRUCT );
+
+	// End Custom Datatype Definition
 
 	
 	/* Clock information */
@@ -158,9 +142,9 @@ int main(int argc, char *argv[])
 
 		static unsigned char ppm[iXmax * 3 * iYmax];
 		double Cy_Ar[sizeof(double) * iYmax];
-		const float DIVISION_FACTOR = 0.82;
+		const float DIVISION_FACTOR = 0.85;
 		int lowerI = 0;
-		int upperI = (iYmax / 2 * DIVISION_FACTOR);
+		int upperI = iYmax / 2 * DIVISION_FACTOR;
 		int stopCount = 0;
 
 		// printf("\n\n%lu\n",sizeof(Cy_Ar));
@@ -180,92 +164,74 @@ int main(int argc, char *argv[])
 		
 		// Resetting all
 		for(int i=1; i<numtasks; i++){
-			MPI_Recv(row_packbuf, row_packsize, MPI_PACKED, i , 0, MPI_COMM_WORLD, &stat);
+			MPI_Recv(&rowStruct, 1, RSTRUCT, i , 0, MPI_COMM_WORLD, &stat);
+			
 			if (i < numtasks / 2) {
-				// CyStruct.rowIndex = lowerI;
-				// CyStruct.Cy_Send = Cy_Ar[lowerI];
-				position = 0;
-				MPI_Pack( &lowerI, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				MPI_Pack( &Cy_Ar[lowerI], 1 , MPI_DOUBLE, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				// lowerI += 1;
+				CyStruct.rowIndex = lowerI;
+				CyStruct.Cy_Send = Cy_Ar[lowerI];
+				// printf("LowerI ; %i\n",lowerI);
+				lowerI += 1;
+
 			}else{
-				position = 0;
-				MPI_Pack( &upperI, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				MPI_Pack( &Cy_Ar[upperI],  1, MPI_DOUBLE, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				// upperI += 1;
+				CyStruct.rowIndex = upperI;
+				CyStruct.Cy_Send = Cy_Ar[upperI];
+				// printf("UpperI ; %i\n",upperI);
+				upperI += 1;
+				
 			}
 			
-			MPI_Send(c_packbuf, position, MPI_PACKED, i, 0, MPI_COMM_WORLD);
+			MPI_Send(&CyStruct, 1, CSTRUCT, i, 0, MPI_COMM_WORLD);
 		}
 
-		// printf("test\n\n");
+		
 		
 		while (1){
-			
-			MPI_Recv(row_packbuf, row_packsize, MPI_PACKED, MPI_ANY_SOURCE , 0, MPI_COMM_WORLD, &stat);
-			position = 0;
- 			MPI_Unpack(row_packbuf, row_packsize, &position, &row_i, 1, MPI_INT, MPI_COMM_WORLD);
-			// printf("position : %i\n", position);
-        	MPI_Unpack(row_packbuf, row_packsize, &position, row_color, rowLength, MPI_UNSIGNED_CHAR, MPI_COMM_WORLD);
-        
-		
+			MPI_Recv(&rowStruct, 1, RSTRUCT, MPI_ANY_SOURCE , 0, MPI_COMM_WORLD, &stat);
+			// printf("stopCount ; %i\n",stopCount);
 			for (int t = 0;t < (iXmax) * 3;t++){ 
 
-				ppm[ (row_i * iXmax * 3) + t ] = row_color[t];
-				ppm[ ((iXmax - row_i - 1) * iXmax * 3) + t ] = row_color[t];
+				// printf("Upper : %i \t Lower : %i \n", upperIndex, lowerIndex);
+				ppm[ (rowStruct.rowIndex * iXmax * 3) + t ] = rowStruct.row_color[t];
+				ppm[ ((iXmax - rowStruct.rowIndex - 1) * iXmax * 3) + t ] = rowStruct.row_color[t];
 				
 			}
 			// Assigning task to the top half of the cores
 			// printf("rank: %i\n", stat.MPI_SOURCE);
 			if (stat.MPI_SOURCE < numtasks / 2) {
+				CyStruct.rowIndex = lowerI;
+				CyStruct.Cy_Send = Cy_Ar[lowerI];
 				lowerI += 1;
-				row_i = lowerI;
-				// printf("LowerI ; %i\n",lowerI);
-				if (lowerI >= (iYmax / 2) * DIVISION_FACTOR){
+				
+				if (lowerI > (iYmax / 2) * DIVISION_FACTOR){
+					// printf("LowerI ; %i\n",lowerI);
 					stopCount += 1;
-					row_i = iYmax + 100000 ;
-					
-
-					position = 0;
-					MPI_Pack( &row_i, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-					MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
-
-					// printf("stop count : %i\n",stopCount);
+					CyStruct.rowIndex = iYmax + 1 ;
+					MPI_Send(&CyStruct, 1, CSTRUCT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
 					if (stopCount == numtasks - 1){
 						break;
 					}
 					continue;
 				}
-				
-				position = 0;
-				MPI_Pack( &row_i, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				MPI_Pack( &Cy_Ar[lowerI], 1 , MPI_DOUBLE, c_packbuf, row_packsize, &position, MPI_COMM_WORLD );
-				MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
+				MPI_Send(&CyStruct, 1, CSTRUCT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
 
 			}else{
+				CyStruct.rowIndex = upperI;
+				CyStruct.Cy_Send = Cy_Ar[upperI];
 				upperI += 1;
-				row_i = upperI;
-				
 				// printf("UpperI ; %i\n",upperI);
 				// printf("rank: %i\n", stat.MPI_SOURCE);
 				
-				if (upperI >= (iYmax / 2 )){
+				if (upperI > (iYmax / 2)){
+					// printf("UpperI ; %i\n",upperI);
 					stopCount += 1;
-					row_i = iYmax + 10000;
-					// printf("row i : %i\n", row_i);
-					position = 0;
-					MPI_Pack( &row_i, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-					MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
-					// printf("test\n\n");
+					CyStruct.rowIndex = iYmax + 1 ;
+					MPI_Send(&CyStruct, 1, CSTRUCT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
 					if (stopCount == numtasks - 1){
 						break;
 					}
 					continue;
 				}
-				position = 0;
-				MPI_Pack( &upperI, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				MPI_Pack( &Cy_Ar[upperI],  1, MPI_DOUBLE, c_packbuf, row_packsize, &position, MPI_COMM_WORLD );
-				MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
+				MPI_Send(&CyStruct, 1, CSTRUCT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
 
 			}
 
@@ -286,8 +252,8 @@ int main(int argc, char *argv[])
 
 		fclose(fp);
 
-		// MPI_Type_free( &CSTRUCT );
-		// MPI_Type_free( &RSTRUCT );
+		MPI_Type_free( &CSTRUCT );
+		MPI_Type_free( &RSTRUCT );
 
 
 		printf("Completed Computing Mandelbrot Set.\n");
@@ -299,28 +265,20 @@ int main(int argc, char *argv[])
 
 
 	}else{
-		
-		double c;
+		rowStruct.rowIndex = 0;
 		
 		while (1){
 			
 			// printf("\n\n%lu\n",sizeof(CyStruct));
-			// if (row_i == 3199){
-			// 	printf("Rank : %i \t Row : %i\n", rank, row_i);
-			// }
-				
-			position = 0;
-			MPI_Pack( &row_i, 1, MPI_INT, row_packbuf, row_packsize, &position, MPI_COMM_WORLD );
-			MPI_Pack(row_color,  rowLength, MPI_UNSIGNED_CHAR, row_packbuf, row_packsize, &position, MPI_COMM_WORLD );
-			MPI_Send(row_packbuf, position, MPI_PACKED, 0, 0, MPI_COMM_WORLD);
 
+			MPI_Send(&rowStruct,1, RSTRUCT, 0, 0, MPI_COMM_WORLD);
 			
-			MPI_Recv(c_packbuf, c_packsize, MPI_PACKED, 0 , 0, MPI_COMM_WORLD, &stat);
-			position = 0;
- 			MPI_Unpack(c_packbuf, c_packsize, &position, &row_i, 1, MPI_INT, MPI_COMM_WORLD);
-        	MPI_Unpack(c_packbuf, c_packsize, &position, &c, 1, MPI_DOUBLE, MPI_COMM_WORLD);
+			MPI_Recv(&CyStruct,1, CSTRUCT, 0, 0, MPI_COMM_WORLD, &stat);
+			
+			rowStruct.rowIndex = CyStruct.rowIndex;
 
-			if (row_i > iYmax / 2){
+			if (CyStruct.rowIndex > iYmax / 2){
+				
 				break;
 			}
 			
@@ -336,7 +294,7 @@ int main(int argc, char *argv[])
 				/* */
 				for(Iteration = 0; Iteration < IterationMax && ((Zx2 + Zy2) < ER2); Iteration++)
 				{
-					Zy = (2 * Zx * Zy) + c;
+					Zy = (2 * Zx * Zy) + CyStruct.Cy_Send;
 					Zx = Zx2 - Zy2 + Cx;
 					Zx2 = Zx * Zx;
 					Zy2 = Zy * Zy;
@@ -346,9 +304,9 @@ int main(int argc, char *argv[])
 				if (Iteration == IterationMax)
 				{
 					// Point within the set. Mark it as black
-					row_color[iX * 3] = 0;
-					row_color[iX * 3 + 1] = 0;
-					row_color[iX * 3 + 2] = 0;
+					rowStruct.row_color[iX * 3] = 0;
+					rowStruct.row_color[iX * 3 + 1] = 0;
+					rowStruct.row_color[iX * 3 + 2] = 0;
 				}
 				else 
 				{
@@ -357,22 +315,22 @@ int main(int argc, char *argv[])
 					// printf("%f\n",c);
 					if (c < 1)
 					{
-						row_color[iX * 3] = 0;
-						row_color[iX * 3 + 1] = 0;
-						row_color[iX * 3 + 2] = 255*c;
+						rowStruct.row_color[iX * 3] = 0;
+						rowStruct.row_color[iX * 3 + 1] = 0;
+						rowStruct.row_color[iX * 3 + 2] = 255*c;
 						// printf("%c\n",rowStruct.row_color[iX * 3 + 2]);
 					}
 					else if (c < 2)
 					{
-						row_color[iX * 3] = 0;
-						row_color[iX * 3 + 1] = 255*(c-1);
-						row_color[iX * 3 + 2] = 255;
+						rowStruct.row_color[iX * 3] = 0;
+						rowStruct.row_color[iX * 3 + 1] = 255*(c-1);
+						rowStruct.row_color[iX * 3 + 2] = 255;
 					}
 					else
 					{
-						row_color[iX * 3] = 255*(c-2);
-						row_color[iX * 3 + 1] = 255;
-						row_color[iX * 3 + 2] = 255;
+						rowStruct.row_color[iX * 3] = 255*(c-2);
+						rowStruct.row_color[iX * 3 + 1] = 255;
+						rowStruct.row_color[iX * 3 + 2] = 255;
 					}
 				}
 
