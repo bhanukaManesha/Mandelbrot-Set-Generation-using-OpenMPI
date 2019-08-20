@@ -51,9 +51,6 @@ int main(int argc, char *argv[])
 	/* it is 24 bit color RGB file */
 	const int MaxColorComponentValue = 255; 
 
-	// RGB color array
-	// static unsigned char color[3];	
-
 	/* Z = Zx + Zy*i;	Z0 = 0 */
 	double Zx, Zy;
 	double Zx2, Zy2; /* Zx2 = Zx*Zx;  Zy2 = Zy*Zy  */
@@ -65,60 +62,6 @@ int main(int argc, char *argv[])
 	const double EscapeRadius = 400;
 	double ER2 = EscapeRadius * EscapeRadius;
 
-
-	// Custom Datatype Definition
-	// struct {
-    //     int rowIndex;
-    //     unsigned char row_color[iXmax * 3];
-    // } rowStruct;
-
-	// struct {
-    //     int rowIndex;
-    //     double Cy_Send;
-    // } CyStruct;
-
-	// int blocklengths_R[2];
-	// int blocklengths_C[2];
-    // MPI_Aint pos_R[2];
-	// MPI_Aint pos_S[2];
-
-	// MPI_Datatype RSTRUCT;
-	// MPI_Datatype CSTRUCT;
-    // MPI_Datatype old_types_R[2];
-	// MPI_Datatype old_types_S[2];
-
-	// blocklengths_R[0] = 1;
-    // blocklengths_R[1] = iXmax * 3;
-	// blocklengths_C[0] = 1;
-    // blocklengths_C[1] = 1;
-
-
-    // old_types_R[0] = MPI_INT;
-    // old_types_R[1] = MPI_UNSIGNED_CHAR;
-	// old_types_S[0] = MPI_INT;
-    // old_types_S[1] = MPI_DOUBLE;
-
-
-    // MPI_Get_address( &rowStruct.rowIndex, &pos_R[0] );
-    // MPI_Get_address( &rowStruct.row_color, &pos_R[1] );
-
-    // pos_R[1] = pos_R[1] - pos_R[0];
-    // pos_R[0] = 0;
-
-	// MPI_Get_address( &CyStruct.rowIndex, &pos_S[0] );
-    // MPI_Get_address( &CyStruct.Cy_Send, &pos_S[1] );
-
-    // pos_S[1] = pos_S[1] - pos_S[0];
-    // pos_S[0] = 0;
-
-    // MPI_Type_create_struct(2, blocklengths_R,pos_R,old_types_R,&RSTRUCT);
-	// MPI_Type_create_struct(2, blocklengths_C,pos_S,old_types_S,&CSTRUCT);
-
-    // MPI_Type_commit( &RSTRUCT );
-	// MPI_Type_commit( &CSTRUCT );
-
-	// // End Custom Datatype Definition
-
 	// Pack Buffer
 	int position;
 	const int c_packsize = sizeof(double) + sizeof(int);
@@ -128,12 +71,8 @@ int main(int argc, char *argv[])
 
 	int rowLength = sizeof(unsigned char) * iYmax * 3;
 
-
 	int row_i;
 	unsigned char row_color[iXmax * 3];
-
-
-
 
 	
 	/* Clock information */
@@ -158,12 +97,11 @@ int main(int argc, char *argv[])
 
 		static unsigned char ppm[iXmax * 3 * iYmax];
 		double Cy_Ar[sizeof(double) * iYmax];
-		const float DIVISION_FACTOR = 0.82;
+		
+		const float DIVISION_FACTOR = 0.83;
 		int lowerI = 0;
 		int upperI = (iYmax / 2 * DIVISION_FACTOR);
 		int stopCount = 0;
-
-		// printf("\n\n%lu\n",sizeof(Cy_Ar));
 
 		/* compute and write image data bytes to the file */
 		for(iY = 0; iY < iYmax / 2; iY++)
@@ -177,35 +115,25 @@ int main(int argc, char *argv[])
 
 		}
 		
-		
 		// Resetting all
 		for(int i=1; i<numtasks; i++){
+			position = 0;
 			MPI_Recv(row_packbuf, row_packsize, MPI_PACKED, i , 0, MPI_COMM_WORLD, &stat);
 			if (i < numtasks / 2) {
-				// CyStruct.rowIndex = lowerI;
-				// CyStruct.Cy_Send = Cy_Ar[lowerI];
-				position = 0;
 				MPI_Pack( &lowerI, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
 				MPI_Pack( &Cy_Ar[lowerI], 1 , MPI_DOUBLE, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				// lowerI += 1;
 			}else{
-				position = 0;
 				MPI_Pack( &upperI, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
 				MPI_Pack( &Cy_Ar[upperI],  1, MPI_DOUBLE, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				// upperI += 1;
 			}
 			
 			MPI_Send(c_packbuf, position, MPI_PACKED, i, 0, MPI_COMM_WORLD);
 		}
 
-		// printf("test\n\n");
-		
 		while (1){
-			
-			MPI_Recv(row_packbuf, row_packsize, MPI_PACKED, MPI_ANY_SOURCE , 0, MPI_COMM_WORLD, &stat);
 			position = 0;
+			MPI_Recv(row_packbuf, row_packsize, MPI_PACKED, MPI_ANY_SOURCE , 0, MPI_COMM_WORLD, &stat);
  			MPI_Unpack(row_packbuf, row_packsize, &position, &row_i, 1, MPI_INT, MPI_COMM_WORLD);
-			// printf("position : %i\n", position);
         	MPI_Unpack(row_packbuf, row_packsize, &position, row_color, rowLength, MPI_UNSIGNED_CHAR, MPI_COMM_WORLD);
         
 		
@@ -216,28 +144,21 @@ int main(int argc, char *argv[])
 				
 			}
 			// Assigning task to the top half of the cores
-			// printf("rank: %i\n", stat.MPI_SOURCE);
+			position = 0;
 			if (stat.MPI_SOURCE < numtasks / 2) {
 				lowerI += 1;
 				row_i = lowerI;
-				// printf("LowerI ; %i\n",lowerI);
 				if (lowerI >= (iYmax / 2) * DIVISION_FACTOR){
 					stopCount += 1;
 					row_i = iYmax + 100000 ;
-					
-
-					position = 0;
 					MPI_Pack( &row_i, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
 					MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
 
-					// printf("stop count : %i\n",stopCount);
 					if (stopCount == numtasks - 1){
 						break;
 					}
 					continue;
 				}
-				
-				position = 0;
 				MPI_Pack( &row_i, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
 				MPI_Pack( &Cy_Ar[lowerI], 1 , MPI_DOUBLE, c_packbuf, row_packsize, &position, MPI_COMM_WORLD );
 				MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
@@ -246,49 +167,29 @@ int main(int argc, char *argv[])
 				upperI += 1;
 				row_i = upperI;
 				
-				// printf("UpperI ; %i\n",upperI);
-				// printf("rank: %i\n", stat.MPI_SOURCE);
-				
 				if (upperI >= (iYmax / 2 )){
 					stopCount += 1;
 					row_i = iYmax + 10000;
-					// printf("row i : %i\n", row_i);
-					position = 0;
 					MPI_Pack( &row_i, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
 					MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
-					// printf("test\n\n");
 					if (stopCount == numtasks - 1){
 						break;
 					}
 					continue;
 				}
-				position = 0;
 				MPI_Pack( &upperI, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
 				MPI_Pack( &Cy_Ar[upperI],  1, MPI_DOUBLE, c_packbuf, row_packsize, &position, MPI_COMM_WORLD );
 				MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
 
 			}
-
-			
-
 		}
 		
 		/* write color to the file */
 		fwrite(ppm, 1, iYmax * iXmax * 3 , fp);
 
-		
-		// Get the clock current time again
-		// Subtract end from start to get the CPU time used.
-		// end = clock();
-		// cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-
 		end = MPI_Wtime(); 
 
 		fclose(fp);
-
-		// MPI_Type_free( &CSTRUCT );
-		// MPI_Type_free( &RSTRUCT );
-
 
 		printf("Completed Computing Mandelbrot Set.\n");
 		printf("File: %s successfully closed.\n", filename);
@@ -303,20 +204,14 @@ int main(int argc, char *argv[])
 		double c;
 		
 		while (1){
-			
-			// printf("\n\n%lu\n",sizeof(CyStruct));
-			// if (row_i == 3199){
-			// 	printf("Rank : %i \t Row : %i\n", rank, row_i);
-			// }
 				
 			position = 0;
 			MPI_Pack( &row_i, 1, MPI_INT, row_packbuf, row_packsize, &position, MPI_COMM_WORLD );
 			MPI_Pack(row_color,  rowLength, MPI_UNSIGNED_CHAR, row_packbuf, row_packsize, &position, MPI_COMM_WORLD );
 			MPI_Send(row_packbuf, position, MPI_PACKED, 0, 0, MPI_COMM_WORLD);
 
-			
+			position = 0;			
 			MPI_Recv(c_packbuf, c_packsize, MPI_PACKED, 0 , 0, MPI_COMM_WORLD, &stat);
-			position = 0;
  			MPI_Unpack(c_packbuf, c_packsize, &position, &row_i, 1, MPI_INT, MPI_COMM_WORLD);
         	MPI_Unpack(c_packbuf, c_packsize, &position, &c, 1, MPI_DOUBLE, MPI_COMM_WORLD);
 
@@ -381,10 +276,6 @@ int main(int argc, char *argv[])
 		}
 
 		MPI_Finalize();
-		
-		
-
-
 
 	}
 
