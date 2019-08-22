@@ -17,6 +17,7 @@
 #include <math.h>
 #include <time.h>
 #include <mpi.h>
+#include <string.h>
 
 // Main program
 int main(int argc, char *argv[])
@@ -98,7 +99,7 @@ int main(int argc, char *argv[])
 		static unsigned char ppm[iXmax * 3 * iYmax];
 		double Cy_Ar[sizeof(double) * iYmax];
 		
-		const float DIVISION_FACTOR = 0.83;
+		const float DIVISION_FACTOR = 0.82;
 		int lowerI = 0;
 		int upperI = (iYmax / 2 * DIVISION_FACTOR);
 		int stopCount = 0;
@@ -137,12 +138,16 @@ int main(int argc, char *argv[])
         	MPI_Unpack(row_packbuf, row_packsize, &position, row_color, rowLength, MPI_UNSIGNED_CHAR, MPI_COMM_WORLD);
         
 		
-			for (int t = 0;t < (iXmax) * 3;t++){ 
+			memcpy(&ppm[row_i * iXmax * 3],row_color, iXmax * 3 );
+			memcpy(&ppm[(iXmax - row_i - 1) * iXmax * 3],row_color, iXmax * 3 );
+			// mempcy()
+			// for (int t = 0;t < (iXmax) * 3;t++){ 
 
-				ppm[ (row_i * iXmax * 3) + t ] = row_color[t];
-				ppm[ ((iXmax - row_i - 1) * iXmax * 3) + t ] = row_color[t];
+			// 	ppm[ (row_i * iXmax * 3) + t ] = row_color[t];
+			// 	ppm[ ((iXmax - row_i - 1) * iXmax * 3) + t ] = row_color[t];
 				
-			}
+				
+			// }
 			// Assigning task to the top half of the cores
 			position = 0;
 			if (stat.MPI_SOURCE < numtasks / 2) {
