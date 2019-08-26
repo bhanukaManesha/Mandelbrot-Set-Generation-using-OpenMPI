@@ -58,8 +58,11 @@ int main()
 	double ER2 = EscapeRadius * EscapeRadius;
 	
 	/* Clock information */
-	clock_t start, end;
-	double cpu_time_used;
+	clock_t startAll, endAll, startComp, endComp;
+	double cpu_time_used_all, cpu_time_used_comp;
+
+	// Get current clock time (to measure the overall program time).
+	startAll = clock();
 
 	/*create new file,give it a name and open it in binary mode  */
 	fp = fopen(filename, "wb"); /* b -  binary mode */
@@ -70,8 +73,8 @@ int main()
 	printf("File: %s successfully opened for writing.\n", filename);
 	printf("Computing Mandelbrot Set. Please wait...\n");
 
-	// Get current clock time.
-	start = clock();
+	// Get current clock time (to measure the multiplication time only).
+	startComp = clock();
 
 	/* compute and write image data bytes to the file */
 	for(iY = 0; iY < iYmax; iY++)
@@ -138,14 +141,20 @@ int main()
 	}
 	// Get the clock current time again
 	// Subtract end from start to get the CPU time used.
-	end = clock();
-	cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+	endComp = clock();
+	cpu_time_used_comp = ((double)(endComp - startComp)) / CLOCKS_PER_SEC;
+	printf("Mandelbrot computational process time: %lf\n", cpu_time_used_comp);
+
+	// Get the clock current time again
+	// Subtract end from start to get the CPU time used.
+	endAll = clock();
+	cpu_time_used_all = ((double)(endAll - startAll)) / CLOCKS_PER_SEC;
 
 	fclose(fp);
 
 	printf("Completed Computing Mandelbrot Set.\n");
 	printf("File: %s successfully closed.\n", filename);
-	printf("Mandelbrot computational process time: %lf\n", cpu_time_used);
+	printf("Mandelbrot Overall time: %lf\n", cpu_time_used_all);
 
 	return 0;
  }

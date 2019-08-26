@@ -112,7 +112,6 @@ int main(int argc, char *argv[])
 
 		// Resetting all
 		for(int i=1; i < numtasks; i++){
-			position = 0;
 			MPI_Recv(row_packbuf, row_packsize, MPI_PACKED, i , 0, MPI_COMM_WORLD, &stat);
 			if (i % 2 == 0) {
 				MPI_Send(&lowerI, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
