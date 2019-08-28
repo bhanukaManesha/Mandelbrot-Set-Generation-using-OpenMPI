@@ -21,16 +21,13 @@
 
 #define iXmax 8000 // default
 #define iYmax 8000 // default
-#define divisionFactor 0.835
+#define divisionFactor 0.45
 
 
 #define CxMin -2.5
 #define CxMax 1.5
 #define CyMin -2.0
 #define CyMax 2.0
-
-
-
 
 
 // Main program
@@ -87,7 +84,7 @@ int main(int argc, char *argv[])
 	int lowerI = 0;
 	int upperI = 0;
 	if (numtasks > 2){
-		upperI = (iYmax / 2 * divisionFactor);
+		upperI = (iYmax * divisionFactor);
 	}
 
 
@@ -125,32 +122,38 @@ int main(int argc, char *argv[])
 			MPI_Recv(row_packbuf, row_packsize, MPI_PACKED, MPI_ANY_SOURCE , 0, MPI_COMM_WORLD, &stat);
  			MPI_Unpack(row_packbuf, row_packsize, &position, &row_i, 1, MPI_INT, MPI_COMM_WORLD);
         	MPI_Unpack(row_packbuf, row_packsize, &position, row_color, rowLength, MPI_UNSIGNED_CHAR, MPI_COMM_WORLD);
-        
+        	// printf("Row : %i -> Rank : %i\n", row_i,stat.MPI_SOURCE);
 		
 			memcpy(&ppm[row_i * iXmax * 3],row_color, iXmax * 3 );
-			memcpy(&ppm[(iXmax - row_i - 1) * iXmax * 3],row_color, iXmax * 3 );
+			// memcpy(&ppm[(iXmax - row_i - 1) * iXmax * 3],row_color, iXmax * 3 );
 				
 			// Assigning task to the top half of the cores
 			if (stat.MPI_SOURCE % 2 == 0) {
 				lowerI += 1;
-				if (lowerI >= (iYmax / 2) * divisionFactor){
-					// printf("Rank : %i\n", stat.MPI_SOURCE);
-					stopCount += 1;
-					lowerI = iYmax + 10 ;
-					MPI_Send(&lowerI, 1, MPI_INT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
-					if (stopCount == numtasks - 1){
-						break;
+				if (lowerI >= iYmax * divisionFactor){
+					if (upperI >= iYmax){
+						// printf("Rank : %i\n", stat.MPI_SOURCE);
+						stopCount += 1;
+						// printf("Stop : %i\n", rank);
+						lowerI = iYmax + 1 ;
+						MPI_Send(&lowerI, 1, MPI_INT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
+						if (stopCount == numtasks - 1){
+							break;
+						}
+						continue;
+					}else{
+						lowerI = upperI + 1;
 					}
-					continue;
 				}
 				MPI_Send(&lowerI, 1, MPI_INT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
 
 			}else{
 				upperI += 1;
-				if (upperI >= (iYmax / 2 )){
-					// printf("Rank : %i\n", stat.MPI_SOURCE);
+				if (upperI >= iYmax ){
+					
 					stopCount += 1;
-					upperI = iYmax + 10;
+					// printf("Stop : %i\n", rank);
+					upperI = iYmax + 1;
 					MPI_Send(&upperI, 1, MPI_INT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
 					if (stopCount == numtasks - 1){
 						break;
@@ -181,7 +184,7 @@ int main(int argc, char *argv[])
 
 		double Cy_Ar[sizeof(double) * iYmax];
 		/* compute and write image data bytes to the file */
-		for(iY = 0; iY < iYmax / 2; iY++)
+		for(iY = 0; iY < iYmax; iY++)
 		{	
 			Cy_Ar[iY] = CyMin + (iY * PixelHeight);
 			if (fabs(Cy_Ar[iY]) < (PixelHeight / 2))
@@ -192,7 +195,7 @@ int main(int argc, char *argv[])
 		}
 
 		while (1){
-				
+			
 			position = 0;
 			MPI_Pack( &row_i, 1, MPI_INT, row_packbuf, row_packsize, &position, MPI_COMM_WORLD );
 			MPI_Pack(row_color,  rowLength, MPI_UNSIGNED_CHAR, row_packbuf, row_packsize, &position, MPI_COMM_WORLD );
@@ -200,7 +203,7 @@ int main(int argc, char *argv[])
 
 			MPI_Recv(&row_i, 1, MPI_INT, 0 , 0, MPI_COMM_WORLD, &stat);
 
-			if (row_i > iYmax / 2){
+			if (row_i > iYmax){
 				break;
 			}
 			

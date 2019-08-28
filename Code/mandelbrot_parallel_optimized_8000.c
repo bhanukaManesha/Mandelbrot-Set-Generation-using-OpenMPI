@@ -19,6 +19,16 @@
 #include <mpi.h>
 #include <string.h>
 
+#define iXmax 8000 // default
+#define iYmax 8000 // default
+
+
+#define CxMin -2.5
+#define CxMax 1.5
+#define CyMin -2.0
+#define CyMax 2.0
+
+
 // Main program
 int main(int argc, char *argv[])
  {
@@ -34,15 +44,9 @@ int main(int argc, char *argv[])
 
 	/* screen ( integer) coordinate */
 	int iX,iY;
-	const int iXmax = 8000; // default
-	const int iYmax = 8000; // default
 
 	/* world ( double) coordinate = parameter plane*/
 	double Cx, Cy;
-	const double CxMin = -2.5;
-	const double CxMax = 1.5;
-	const double CyMin = -2.0;
-	const double CyMax = 2.0;
 
 	/* */
 	double PixelWidth = (CxMax - CxMin)/iXmax;
@@ -65,19 +69,20 @@ int main(int argc, char *argv[])
 
 	// Pack Buffer
 	int position;
-	const int c_packsize = sizeof(double) + sizeof(int);
 	const int row_packsize = sizeof(unsigned char) * iYmax * 3 + sizeof(int);
-    char c_packbuf[c_packsize];
 	char row_packbuf[row_packsize];
 
-	int rowLength = sizeof(unsigned char) * iYmax * 3;
+	int rowLength = row_packsize - sizeof(int);
 
 	int row_i;
 	unsigned char row_color[iXmax * 3];
 
-	
 	/* Clock information */
 	double start, end;
+
+	int rowCount = 0;
+	
+
 
 	if (rank == 0){
 		FILE * fp;
@@ -89,7 +94,6 @@ int main(int argc, char *argv[])
 
 		/*write ASCII header to the file (PPM file format)*/
 		fprintf(fp,"P6\n %s\n %d\n %d\n %d\n", comment, iXmax, iYmax, MaxColorComponentValue);
-
 		printf("File: %s successfully opened for writing.\n", filename);
 		printf("Computing Mandelbrot Set. Please wait...\n");
 		
@@ -97,38 +101,12 @@ int main(int argc, char *argv[])
 		start = MPI_Wtime();
 
 		static unsigned char ppm[iXmax * 3 * iYmax];
-		double Cy_Ar[sizeof(double) * iYmax];
-		
-		const float DIVISION_FACTOR = 0.82;
-		int lowerI = 0;
-		int upperI = (iYmax / 2 * DIVISION_FACTOR);
 		int stopCount = 0;
 
-		/* compute and write image data bytes to the file */
-		for(iY = 0; iY < iYmax / 2; iY++)
-		{	
-			// printf("Started Row %i.\n",iY);
-			Cy_Ar[iY] = CyMin + (iY * PixelHeight);
-			if (fabs(Cy_Ar[iY]) < (PixelHeight / 2))
-			{
-				Cy_Ar[iY] = 0.0; /* Main antenna */
-			}
-
-		}
-		
 		// Resetting all
-		for(int i=1; i<numtasks; i++){
-			position = 0;
+		for(int i=1; i < numtasks; i++){
 			MPI_Recv(row_packbuf, row_packsize, MPI_PACKED, i , 0, MPI_COMM_WORLD, &stat);
-			if (i < numtasks / 2) {
-				MPI_Pack( &lowerI, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				MPI_Pack( &Cy_Ar[lowerI], 1 , MPI_DOUBLE, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-			}else{
-				MPI_Pack( &upperI, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				MPI_Pack( &Cy_Ar[upperI],  1, MPI_DOUBLE, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-			}
-			
-			MPI_Send(c_packbuf, position, MPI_PACKED, i, 0, MPI_COMM_WORLD);
+			MPI_Send(&rowCount, 1, MPI_INT, i, 0, MPI_COMM_WORLD);	
 		}
 
 		while (1){
@@ -137,57 +115,26 @@ int main(int argc, char *argv[])
  			MPI_Unpack(row_packbuf, row_packsize, &position, &row_i, 1, MPI_INT, MPI_COMM_WORLD);
         	MPI_Unpack(row_packbuf, row_packsize, &position, row_color, rowLength, MPI_UNSIGNED_CHAR, MPI_COMM_WORLD);
         
+			// printf("%i\n", row_i);
 		
 			memcpy(&ppm[row_i * iXmax * 3],row_color, iXmax * 3 );
-			memcpy(&ppm[(iXmax - row_i - 1) * iXmax * 3],row_color, iXmax * 3 );
-			// mempcy()
-			// for (int t = 0;t < (iXmax) * 3;t++){ 
-
-			// 	ppm[ (row_i * iXmax * 3) + t ] = row_color[t];
-			// 	ppm[ ((iXmax - row_i - 1) * iXmax * 3) + t ] = row_color[t];
 				
-				
-			// }
 			// Assigning task to the top half of the cores
-			position = 0;
-			if (stat.MPI_SOURCE < numtasks / 2) {
-				lowerI += 1;
-				row_i = lowerI;
-				if (lowerI >= (iYmax / 2) * DIVISION_FACTOR){
+			rowCount += 1;
+			if (rowCount >= iYmax){
+					// printf("Rank : %i -> %i\n", stat.MPI_SOURCE,row_i);
 					stopCount += 1;
-					row_i = iYmax + 100000 ;
-					MPI_Pack( &row_i, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-					MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
-
+					rowCount = iYmax + 10 ;
+					MPI_Send(&rowCount, 1, MPI_INT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
 					if (stopCount == numtasks - 1){
 						break;
 					}
 					continue;
-				}
-				MPI_Pack( &row_i, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				MPI_Pack( &Cy_Ar[lowerI], 1 , MPI_DOUBLE, c_packbuf, row_packsize, &position, MPI_COMM_WORLD );
-				MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
-
-			}else{
-				upperI += 1;
-				row_i = upperI;
-				
-				if (upperI >= (iYmax / 2 )){
-					stopCount += 1;
-					row_i = iYmax + 10000;
-					MPI_Pack( &row_i, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-					MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
-					if (stopCount == numtasks - 1){
-						break;
-					}
-					continue;
-				}
-				MPI_Pack( &upperI, 1, MPI_INT, c_packbuf, c_packsize, &position, MPI_COMM_WORLD );
-				MPI_Pack( &Cy_Ar[upperI],  1, MPI_DOUBLE, c_packbuf, row_packsize, &position, MPI_COMM_WORLD );
-				MPI_Send(c_packbuf, position, MPI_PACKED, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
-
 			}
+			MPI_Send(&rowCount, 1, MPI_INT, stat.MPI_SOURCE, 0, MPI_COMM_WORLD);
+
 		}
+
 		
 		/* write color to the file */
 		fwrite(ppm, 1, iYmax * iXmax * 3 , fp);
@@ -204,23 +151,30 @@ int main(int argc, char *argv[])
 		return 0;
 
 
-	}else{
-		
-		double c;
-		
+	}else{	
+
+		double Cy_Ar[sizeof(double) * iYmax];
+		/* compute and write image data bytes to the file */
+		for(iY = 0; iY < iYmax; iY++)
+		{	
+			Cy_Ar[iY] = CyMin + (iY * PixelHeight);
+			if (fabs(Cy_Ar[iY]) < (PixelHeight / 2))
+			{
+				Cy_Ar[iY] = 0.0; /* Main antenna */
+			}
+
+		}
+
 		while (1){
-				
+			
 			position = 0;
 			MPI_Pack( &row_i, 1, MPI_INT, row_packbuf, row_packsize, &position, MPI_COMM_WORLD );
 			MPI_Pack(row_color,  rowLength, MPI_UNSIGNED_CHAR, row_packbuf, row_packsize, &position, MPI_COMM_WORLD );
 			MPI_Send(row_packbuf, position, MPI_PACKED, 0, 0, MPI_COMM_WORLD);
 
-			position = 0;			
-			MPI_Recv(c_packbuf, c_packsize, MPI_PACKED, 0 , 0, MPI_COMM_WORLD, &stat);
- 			MPI_Unpack(c_packbuf, c_packsize, &position, &row_i, 1, MPI_INT, MPI_COMM_WORLD);
-        	MPI_Unpack(c_packbuf, c_packsize, &position, &c, 1, MPI_DOUBLE, MPI_COMM_WORLD);
+			MPI_Recv(&row_i, 1, MPI_INT, 0 , 0, MPI_COMM_WORLD, &stat);
 
-			if (row_i > iYmax / 2){
+			if (row_i > iYmax){
 				break;
 			}
 			
@@ -232,11 +186,10 @@ int main(int argc, char *argv[])
 				Zy = 0.0;
 				Zx2 = Zx * Zx;
 				Zy2 = Zy * Zy;
-
 				/* */
 				for(Iteration = 0; Iteration < IterationMax && ((Zx2 + Zy2) < ER2); Iteration++)
 				{
-					Zy = (2 * Zx * Zy) + c;
+					Zy = (2 * Zx * Zy) + Cy_Ar[row_i];
 					Zx = Zx2 - Zy2 + Cx;
 					Zx2 = Zx * Zx;
 					Zy2 = Zy * Zy;
