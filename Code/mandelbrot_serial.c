@@ -16,14 +16,26 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
+
+#define iXmax 8000 // default
+#define iYmax 8000 // default
+#define sizeOfppm iXmax * iYmax * 3
 
 // Main program
 int main()
  {
+	/* Clock information */
+	clock_t startAll, endAll, startComp, endComp;
+	double cpu_time_used_all, cpu_time_used_comp;
+
+	// Get current clock time (to measure the overall program time).
+	startAll = clock();
+
 	/* screen ( integer) coordinate */
 	int iX,iY;
-	const int iXmax = 8000; // default
-	const int iYmax = 8000; // default
+	// const int iXmax = 8000; // default
+	// const int iYmax = 8000; // default
 
 	/* world ( double) coordinate = parameter plane*/
 	double Cx, Cy;
@@ -51,18 +63,11 @@ int main()
 	double Zx2, Zy2; /* Zx2 = Zx*Zx;  Zy2 = Zy*Zy  */
 	/*  */
 	int Iteration;
-	const int IterationMax = 1000; // default
+	const int IterationMax = 2000; // default
 
 	/* bail-out value , radius of circle ;  */
 	const double EscapeRadius = 400;
 	double ER2 = EscapeRadius * EscapeRadius;
-	
-	/* Clock information */
-	clock_t startAll, endAll, startComp, endComp;
-	double cpu_time_used_all, cpu_time_used_comp;
-
-	// Get current clock time (to measure the overall program time).
-	startAll = clock();
 
 	/*create new file,give it a name and open it in binary mode  */
 	fp = fopen(filename, "wb"); /* b -  binary mode */
@@ -72,6 +77,28 @@ int main()
 
 	printf("File: %s successfully opened for writing.\n", filename);
 	printf("Computing Mandelbrot Set. Please wait...\n");
+
+	// Define the ppm as an array
+	static unsigned char ppm[sizeOfppm];
+
+		// Calculate CY Values ?? Can optimize
+	double Cy_Ar[sizeof(double) * iYmax];
+	/* compute and write image data bytes to the file */
+	for(iY = 0; iY < iYmax; iY++)
+	{	
+		Cy_Ar[iY] = CyMin + (iY * PixelHeight);
+		if (fabs(Cy_Ar[iY]) < (PixelHeight / 2))
+		{
+			Cy_Ar[iY] = 0.0; /* Main antenna */
+		}
+
+	}
+
+	// Calculate CY Values ?? Can optimize
+	double Cx_A[sizeof(double) * iXmax];
+	for(iX = 0; iX < iXmax; iX++){
+		Cx_A[iX] = CxMin + (iX * PixelWidth);
+	}
 
 	// Get current clock time (to measure the multiplication time only).
 	startComp = clock();
@@ -97,8 +124,8 @@ int main()
 			/* */
 			for(Iteration = 0; Iteration < IterationMax && ((Zx2 + Zy2) < ER2); Iteration++)
 			{
-				Zy = (2 * Zx * Zy) + Cy;
-				Zx = Zx2 - Zy2 + Cx;
+				Zy = (2 * Zx * Zy) + Cy_Ar[iY];
+				Zx = Zx2 - Zy2 + Cx_A[iX];
 				Zx2 = Zx * Zx;
 				Zy2 = Zy * Zy;
 			};
@@ -133,10 +160,14 @@ int main()
 					color[1] = 255;
 					color[2] = 255;
 				}
+
+
 			}
 
-			/* write color to the file */
-			fwrite(color, 1, 3, fp);
+			memcpy(&ppm[iY * iYmax * 3 + iX * 3],color, 3);
+			
+
+			
 		}
 	}
 	// Get the clock current time again
@@ -145,15 +176,19 @@ int main()
 	cpu_time_used_comp = ((double)(endComp - startComp)) / CLOCKS_PER_SEC;
 	printf("Mandelbrot computational process time: %lf\n", cpu_time_used_comp);
 
-	// Get the clock current time again
-	// Subtract end from start to get the CPU time used.
-	endAll = clock();
-	cpu_time_used_all = ((double)(endAll - startAll)) / CLOCKS_PER_SEC;
+	/* write color to the file */
+	fwrite(ppm, 1, iXmax * iYmax * 3, fp);
 
 	fclose(fp);
 
 	printf("Completed Computing Mandelbrot Set.\n");
 	printf("File: %s successfully closed.\n", filename);
+
+	// Get the clock current time again
+	// Subtract end from start to get the CPU time used.
+	endAll = clock();
+	cpu_time_used_all = ((double)(endAll - startAll)) / CLOCKS_PER_SEC;
+
 	printf("Mandelbrot Overall time: %lf\n", cpu_time_used_all);
 
 	return 0;

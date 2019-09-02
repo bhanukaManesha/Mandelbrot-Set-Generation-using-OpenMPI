@@ -21,7 +21,7 @@
 
 #define iXmax 8000 // default
 #define iYmax 8000 // default
-
+#define sizeOfppm iXmax * iYmax * 3
 
 #define CxMin -2.5
 #define CxMax 1.5
@@ -32,6 +32,11 @@
 // Main program
 int main(int argc, char *argv[])
  {
+	/* Clock information */
+	double start, start_comp, end, end_comp;
+
+	// Get current clock time.
+	start = MPI_Wtime();
 
 	//  MPI 
 	int numtasks, rank;
@@ -61,7 +66,7 @@ int main(int argc, char *argv[])
 	double Zx2, Zy2; /* Zx2 = Zx*Zx;  Zy2 = Zy*Zy  */
 	/*  */
 	int Iteration;
-	const int IterationMax = 1000; // default
+	const int IterationMax = 2000; // default
 
 	/* bail-out value , radius of circle ;  */
 	const double EscapeRadius = 400;
@@ -77,12 +82,7 @@ int main(int argc, char *argv[])
 	int row_i;
 	unsigned char row_color[iXmax * 3];
 
-	/* Clock information */
-	double start, end;
-
 	int rowCount = 0;
-	
-
 
 	if (rank == 0){
 		FILE * fp;
@@ -96,12 +96,13 @@ int main(int argc, char *argv[])
 		fprintf(fp,"P6\n %s\n %d\n %d\n %d\n", comment, iXmax, iYmax, MaxColorComponentValue);
 		printf("File: %s successfully opened for writing.\n", filename);
 		printf("Computing Mandelbrot Set. Please wait...\n");
-		
-		// Get current clock time.
-		start = MPI_Wtime();
 
-		static unsigned char ppm[iXmax * 3 * iYmax];
+
+		static unsigned char ppm[sizeOfppm];
 		int stopCount = 0;
+
+		// Get current clock time.
+		start_comp = MPI_Wtime();
 
 		// Resetting all
 		for(int i=1; i < numtasks; i++){
@@ -114,9 +115,7 @@ int main(int argc, char *argv[])
 			MPI_Recv(row_packbuf, row_packsize, MPI_PACKED, MPI_ANY_SOURCE , 0, MPI_COMM_WORLD, &stat);
  			MPI_Unpack(row_packbuf, row_packsize, &position, &row_i, 1, MPI_INT, MPI_COMM_WORLD);
         	MPI_Unpack(row_packbuf, row_packsize, &position, row_color, rowLength, MPI_UNSIGNED_CHAR, MPI_COMM_WORLD);
-        
-			// printf("%i\n", row_i);
-		
+        		
 			memcpy(&ppm[row_i * iXmax * 3],row_color, iXmax * 3 );
 				
 			// Assigning task to the top half of the cores
@@ -135,18 +134,16 @@ int main(int argc, char *argv[])
 
 		}
 
+		end_comp = MPI_Wtime(); 
+		printf( "Mandelbrot computational process time %f\n", end_comp - start_comp ); 
+		printf("Completed Computing Mandelbrot Set.\n");
 		
 		/* write color to the file */
 		fwrite(ppm, 1, iYmax * iXmax * 3 , fp);
-
-		end = MPI_Wtime(); 
-
 		fclose(fp);
-
-		printf("Completed Computing Mandelbrot Set.\n");
+		end = MPI_Wtime(); 
 		printf("File: %s successfully closed.\n", filename);
-		printf( "Mandelbrot computational process time %f\n", end - start ); 
-		// printf("Mandelbrot computational process time: %lf\n", cpu_time_used);
+		printf( "Mandelbrot total process time %f\n", end - start ); 
 		MPI_Finalize();
 		return 0;
 

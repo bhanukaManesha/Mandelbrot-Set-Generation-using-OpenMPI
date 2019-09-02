@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.8.21)  27 AUG 2019 15:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.8.21)  3 SEP 2019 06:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -448,43 +448,133 @@ Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
 \rot@float@box=\box32
 \rot@mess@toks=\toks25
 )
-(./Report.aux)
-\openout1 = `Report.aux'.
+(/usr/local/texlive/2019/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 15.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmr.fd
-File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+(/usr/local/texlive/2019/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2018/10/06 v3.3-154 Customizing captions (AR)
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2018/09/12 v1.8c caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 64.
+\captionmargin=\dimen139
+\captionmargin@=\dimen140
+\captionwidth=\dimen141
+\caption@tempdima=\dimen142
+\caption@indent=\dimen143
+\caption@parindent=\dimen144
+\caption@hangindent=\dimen145
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
 )
-LaTeX Font Info:    ... okay on input line 15.
 
--- Lines per column: 56 (exact).
-(/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count116
-\scratchdimen=\dimen139
-\scratchbox=\box33
-\nofMPsegments=\count117
-\nofMParguments=\count118
-\everyMPshowfont=\toks26
-\MPscratchCnt=\count119
-\MPscratchDim=\dimen140
-\MPnumerator=\count120
-\makeMPintoPDFobject=\count121
-\everyMPtoPDFconversion=\toks27
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package caption Warning: Unsupported document class (or package) detected,
+(caption)                usage of the caption package is not recommended.
+See the caption package documentation for explanation.
+
+Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEta
+blestring \footnotesize \bgroup \par \centering \@IEEEtabletopskipstrut {\norma
+lfont \footnotesize #1}\\{\normalfont \footnotesize \scshape #2}\par \addvspace
+ {0.5\baselineskip }\egroup \@IEEEtablecaptionsepspace \else \@IEEEfigurecaptio
+nsepspace \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspac
+e \nobreakspace #2}\ifdim \wd \@tempboxa >\hsize \setbox \@tempboxa \hbox {\nor
+malfont \footnotesize {#1.}\nobreakspace \nobreakspace }\parbox [t]{\hsize }{\n
+ormalfont \footnotesize \noindent \unhbox \@tempboxa #2}\else \ifCLASSOPTIONcon
+ference \hbox to\hsize {\normalfont \footnotesize \hfil \box \@tempboxa \hfil }
+\else \hbox to\hsize {\normalfont \footnotesize \box \@tempboxa \hfil }\fi \fi 
+\fi .
+\c@caption@flags=\count116
+\c@ContinuedFloat=\count117
+Package caption Info: rotating package is loaded.
+)
+\c@KVtest=\count118
+\sf@farskip=\skip51
+\sf@captopadj=\dimen146
+\sf@capskip=\skip52
+\sf@nearskip=\skip53
+\c@subfigure=\count119
+\c@subfigure@save=\count120
+\c@lofdepth=\count121
+\c@subtable=\count122
+\c@subtable@save=\count123
+\c@lotdepth=\count124
+\sf@top=\skip54
+\sf@bottom=\skip55
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count125
+\float@exts=\toks26
+\float@box=\box33
+\@float@everytoks=\toks27
+\@floatcapt=\box34
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/appendix/appendix.sty
+Package: appendix 2009/09/02 v1.2b extra appendix facilities
+\c@@pps=\count126
+\c@@ppsavesec=\count127
+\c@@ppsaveapp=\count128
+
+
+! LaTeX Error: Command \appendices already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.233   \@ppsaveapp\@pprestoresec}
+                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count129
+\lst@gtempboxa=\box35
+\lst@token=\toks28
+\lst@length=\count130
+\lst@currlwidth=\dimen147
+\lst@column=\count131
+\lst@pos=\count132
+\lst@lostspace=\dimen148
+\lst@width=\dimen149
+\lst@newlines=\count133
+\lst@lineno=\count134
+\lst@maxwidth=\dimen150
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
+\c@lstnumber=\count135
+\lst@skipnumbers=\count136
+\lst@framebox=\box36
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2019/02/27 1.8b listings configuration
+))
+Package: listings 2019/02/27 1.8b (Carsten Heinz)
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/02/27 1.8b listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen151
+\WF@size=\dimen152
+\c@WF@wrappedlines=\count137
+\WF@box=\box37
+\WF@everypar=\toks29
+Package: wrapfig 2003/01/31  v 3.6
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf.sty
+Package: epstopdf 2016/05/15 v2.6 Conversion with epstopdf on the fly (HO)
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
 (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/infwarerr.sty
@@ -534,704 +624,181 @@ G,.JBIG2,.JB2,.eps]
 (/usr/local/texlive/2019/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
-))
-ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+msa on input line 30.
+)))
+(./Report.aux
+
+LaTeX Warning: Label `fig:PropProf' multiply defined.
+
+
+LaTeX Warning: Label `fig:PropProf' multiply defined.
+
+
+LaTeX Warning: Label `fig:PropProf' multiply defined.
+
+)
+\openout1 = `Report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 51.
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 51.
+
+-- Lines per column: 56 (exact).
+(/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count138
+\scratchdimen=\dimen153
+\scratchbox=\box38
+\nofMPsegments=\count139
+\nofMParguments=\count140
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count141
+\MPscratchDim=\dimen154
+\MPnumerator=\count142
+\makeMPintoPDFobject=\count143
+\everyMPtoPDFconversion=\toks31
+) ABD: EveryShipout initializing macros
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: float package is loaded.
+Package caption Info: listings package is loaded.
+Package caption Info: wrapfig package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count144
+LaTeX Font Info:    Try loading font information for U+msa on input line 66.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 30.
+LaTeX Font Info:    Try loading font information for U+msb on input line 66.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 30.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 66.
  [1{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 207.
+<fig/P_SCHEME.png, id=15, 3501.08pt x 1025.8325pt>
+File: fig/P_SCHEME.png Graphic file (type png)
+<use fig/P_SCHEME.png>
+Package pdftex.def Info: fig/P_SCHEME.png  used on input line 190.
+(pdftex.def)             Requested size: 245.71754pt x 71.9878pt.
 
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<fig/Naive.png, id=17, 1335.99126pt x 2146.0175pt>
+File: fig/Naive.png Graphic file (type png)
+<use fig/Naive.png>
+Package pdftex.def Info: fig/Naive.png  used on input line 215.
+(pdftex.def)             Requested size: 216.81pt x 348.2489pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<fig/FCFS.png, id=18, 2135.98pt x 2860.6875pt>
+File: fig/FCFS.png Graphic file (type png)
+<use fig/FCFS.png>
+Package pdftex.def Info: fig/FCFS.png  used on input line 227.
+(pdftex.def)             Requested size: 216.81pt x 290.36327pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2 <./fig/P_SCHEME.png>]
+<fig/Alternating.png, id=25, 1200.485pt x 2748.2675pt>
+File: fig/Alternating.png Graphic file (type png)
+<use fig/Alternating.png>
+Package pdftex.def Info: fig/Alternating.png  used on input line 238.
+(pdftex.def)             Requested size: 216.81068pt x 433.60927pt.
+
+Overfull \vbox (132.97272pt too high) has occurred while \output is active []
+
+
+[3 <./fig/Naive.png> <./fig/FCFS.png> <./fig/Alternating.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]\OT1/ptm/b/n/8 Theoretical
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]\OT1/ptm/b/n/8 Alternating
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 277--277
+[]\OT1/ptm/b/n/8 Na[]^^Pve Row-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 277--277
+[]\OT1/ptm/b/n/8 Alternating
+ []
+
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 283.
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+<fig/theo1.png, id=32, 383.9946pt x 212.4738pt>
+File: fig/theo1.png Graphic file (type png)
+<use fig/theo1.png>
+Package pdftex.def Info: fig/theo1.png  used on input line 295.
+(pdftex.def)             Requested size: 216.81pt x 119.96686pt.
+<fig/theo2.png, id=33, 385.44pt x 212.4738pt>
+File: fig/theo2.png Graphic file (type png)
+<use fig/theo2.png>
+Package pdftex.def Info: fig/theo2.png  used on input line 301.
+(pdftex.def)             Requested size: 216.81pt x 119.5162pt.
+ [4]
+(./Report.bbl) [5 <./fig/theo1.png> <./fig/theo2.png>]
+<fig/SCal.png, id=43, 519.9425pt x 435.6275pt>
+File: fig/SCal.png Graphic file (type png)
+<use fig/SCal.png>
+Package pdftex.def Info: fig/SCal.png  used on input line 365.
+(pdftex.def)             Requested size: 199.16928pt x 166.8696pt.
+ [6
+
+ <./fig/SCal.png>]
+<fig/NaiveCal.png, id=48, 2220.295pt x 719.68875pt>
+File: fig/NaiveCal.png Graphic file (type png)
+<use fig/NaiveCal.png>
+Package pdftex.def Info: fig/NaiveCal.png  used on input line 372.
+(pdftex.def)             Requested size: 671.98859pt x 217.81908pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<fig/FCFSCal.png, id=49, 2219.29124pt x 720.6925pt>
+File: fig/FCFSCal.png Graphic file (type png)
+<use fig/FCFSCal.png>
+Package pdftex.def Info: fig/FCFSCal.png  used on input line 379.
+(pdftex.def)             Requested size: 671.98956pt x 218.22185pt.
+<fig/AlCal.png, id=50, 2215.27625pt x 718.685pt>
+File: fig/AlCal.png Graphic file (type png)
+<use fig/AlCal.png>
+Package pdftex.def Info: fig/AlCal.png  used on input line 386.
+(pdftex.def)             Requested size: 671.99072pt x 218.00876pt.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 393.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) (./Report.bbl)
-[2]
-
-! LaTeX Error: Illegal character in array arg.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.222 	\begin{tabular}{\textwidth}
-                                  {|c|l|l|l|l|l|l|l|}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Misplaced \noalign.
-\hline ->\noalign 
-                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
-l.223 		\hline
-              
-I expect to see \noalign only after the \cr of
-an alignment. Proceed, and I'll ignore this case.
-
-! You can't use `\hrule' here except with leaders.
-\hline ->\noalign {\ifnum 0=`}\fi \hrule 
-                                         \@height \arrayrulewidth \futurelet...
-l.223 		\hline
-              
-To put a horizontal rule in an hbox or an alignment,
-you should use \leaders or \hrulefill (see The TeXbook).
-
-! Missing number, treated as zero.
-<to be read again> 
-                   \futurelet 
-l.223 		\hline
-              
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-! Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \futurelet 
-l.223 		\hline
-              
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-! Misplaced \omit.
-\multispan ->\omit 
-                   \@multispan 
-l.224 ...{2}{|c|}{\textbf{Computer Specification}}
-                                                                            ...
-I expect to see \omit only after tab marks or the \cr of
-an alignment. Proceed, and I'll ignore this case.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.224 ...{2}{|c|}{\textbf{Computer Specification}}
-                                                                            ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.224 ...                                        &
-                                                   \multicolumn{6}{l|}{}    ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.224 ...                  & \multicolumn{6}{l|}{}
-                                                                            ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.225 ...ticolumn{2}{|c|}{\textbf{Value of iYmax}}
-                                                                            ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.225 ...                                        &
-                                                   \multicolumn{6}{l|}{}    ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.225 ...                  & \multicolumn{6}{l|}{}
-                                                                            ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.226 ...ticolumn{2}{|c|}{\textbf{Value of iXmax}}
-                                                                            ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.226 ...                                        &
-                                                   \multicolumn{6}{l|}{}    ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.226 ...                  & \multicolumn{6}{l|}{}
-                                                                            ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.227 ...n{2}{|c|}{\textbf{Value of IterationMax}}
-                                                                            ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.227 ...                                        &
-                                                   \multicolumn{6}{l|}{}    ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.227 ...                  & \multicolumn{6}{l|}{}
-                                                                            ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Undefined control sequence.
-\@sharp ->\multirow 
-                    {2}{*}{}
-l.228 		\multicolumn{1}{|l|}{\multirow{2}{*}{}}
-                                                & \multicolumn{1}{c|}{\multi...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.228 		\multicolumn{1}{|l|}{\multirow{2}{*}{}} &
-                                                  \multicolumn{1}{c|}{\multi...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Undefined control sequence.
-\@sharp ->\multirow 
-                    {2}{*}{\textbf {Serial Program}}
-l.228 ...\multirow{2}{*}{\textbf{Serial Program}}}
-                                                   & \multicolumn{6}{c|}{\te...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.228 ...ultirow{2}{*}{\textbf{Serial Program}}} &
-                                                   \multicolumn{6}{c|}{\text...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.228 ...icolumn{6}{c|}{\textbf{Parallel Program}}
-                                                                            ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.228 ...                           \\ \cline{3-8}
-                                                  
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.228 ...                           \\ \cline{3-8}
-                                                  
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.229 		\multicolumn{1}{|l|}{}                  &
-                                                  \multicolumn{1}{c|}{}     ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.229 ...                                        &
-                                                   \multicolumn{1}{c|}{\text...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.229 ...      & \multicolumn{1}{c|}{\textbf{2}} &
-                                                   \multicolumn{1}{c|}{\text...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.229 ...f{2}} & \multicolumn{1}{c|}{\textbf{4}} &
-                                                   \multicolumn{1}{c|}{\text...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.229 ...f{4}} & \multicolumn{1}{c|}{\textbf{6}} &
-                                                   \multicolumn{1}{c|}{\text...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.229 ...f{6}} & \multicolumn{1}{c|}{\textbf{8}} &
-                                                   \multicolumn{1}{c|}{\text...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<template> \endtemplate 
-                        
-l.229 ...{8}} & \multicolumn{1}{c|}{\textbf{16}} &
-                                                   \multicolumn{1}{c|}{\text...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.230 		\textbf{Run \#1}                        &
-                                                  300000                    ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.230 ...                                        &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.230 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.230 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.230 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.230 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.230 ...     & 300000                           &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.231 		\textbf{Run \#2}                        &
-                                                  300000                    ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.231 ...                                        &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.231 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.231 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.231 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.231 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.231 ...     & 300000                           &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.232 		\textbf{Run \#3}                        &
-                                                  300000                    ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.232 ...                                        &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.232 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.232 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.232 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.232 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.232 ...     & 300000                           &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.233 		\textbf{Run \#4}                        &
-                                                  300000                    ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.233 ...                                        &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.233 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.233 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.233 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.233 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.233 ...     & 300000                           &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.234 		\textbf{Run \#5}                        &
-                                                  300000                    ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.234 ...                                        &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.234 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.234 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.234 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.234 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.234 ...     & 300000                           &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.235 		\textbf{Average}                        &
-                                                  300000                    ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.235 ...                                        &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.235 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.235 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.235 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.235 ...      & 300000                          &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.235 ...     & 300000                           &
-                                                   300000                   ...
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
+)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1243,34 +810,38 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[3
+[7] [8 <./fig/NaiveCal.png>] [9 <./fig/FCFSCal.png>] [10 <./fig/AlCal.png>]
+(./Report.aux)
 
-] (./Report.aux) ) 
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 6016 strings out of 492616
- 99297 string characters out of 6129481
- 174178 words of memory out of 5000000
- 9807 multiletter control sequences out of 15000+600000
- 46537 words of font info for 97 fonts, out of 8000000 for 9000
+ 9337 strings out of 492616
+ 149245 string characters out of 6129481
+ 430659 words of memory out of 5000000
+ 13068 multiletter control sequences out of 15000+600000
+ 44556 words of font info for 96 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,46p,793b,253s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.e
-nc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pf
-b></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb>
-</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
-usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
-r/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/l
-ocal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
-cal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/loca
-l/texlive/2019/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texliv
-e/2019/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/tex
-mf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2019/texmf-dist/f
-onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1
-/urw/times/utmri8a.pfb>
-Output written on Report.pdf (3 pages, 129955 bytes).
+ 44i,12n,49p,1203b,1172s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texl
+ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texliv
+e/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/
+2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/201
+9/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2019/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2019/tex
+mf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2019/texmf-dist/
+fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type
+1/urw/times/utmbi8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/tim
+es/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a
+.pfb>
+Output written on Report.pdf (10 pages, 1438302 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
- 45 compressed objects within 1 object stream
+ 111 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
