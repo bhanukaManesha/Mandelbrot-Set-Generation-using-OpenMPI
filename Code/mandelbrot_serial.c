@@ -1,6 +1,10 @@
 //////////////////////////////////////////////////////////////////////////////////////
+// Bhanuka Manesha Samarasekera Vitharana Gamage
+// 28993373
+// bsam00002@student.monash.edu
+// Parallel Computing - Assignment 1
 // mandelbrot.c program: Mandelbort Set Fractal (Color Serial Code Implementation).
-// --------------------------------
+//
 //  1. Draws Mandelbrot set for Fc(z) = z*z +c
 //  using Mandelbrot algorithm ( boolean escape time )
 //	This code is modified from the original version as available at:
@@ -12,21 +16,27 @@
 // see http://en.wikipedia.org/wiki/Portable_pixmap
 // to see the file use external application ( graphic viewer)
 //////////////////////////////////////////////////////////////////////////////////////
+
+// Including the libraries for the preprocessor
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
 #include <string.h>
 
+// Define the macro for the iXmax
 #define iXmax 8000 // default
+// Define the macro for the iYmax
 #define iYmax 8000 // default
+// Define the macro for the size of the final mandelbrot image
 #define sizeOfppm iXmax * iYmax * 3
 
 // Main program
 int main()
  {
-	/* Clock information */
+	// Defining the variables used for calculating the time
 	clock_t startAll, endAll, startComp, endComp;
+	// Defining the variables used for to store the calculated time
 	double cpu_time_used_all, cpu_time_used_comp;
 
 	// Get current clock time (to measure the overall program time).
@@ -34,8 +44,6 @@ int main()
 
 	/* screen ( integer) coordinate */
 	int iX,iY;
-	// const int iXmax = 8000; // default
-	// const int iYmax = 8000; // default
 
 	/* world ( double) coordinate = parameter plane*/
 	double Cx, Cy;
@@ -44,7 +52,7 @@ int main()
 	const double CyMin = -2.0;
 	const double CyMax = 2.0;
 
-	/* */
+	/* Store the pixel width and height */
 	double PixelWidth = (CxMax - CxMin)/iXmax;
 	double PixelHeight = (CyMax - CyMin)/iYmax;
 
@@ -58,10 +66,11 @@ int main()
 	// RGB color array
 	static unsigned char color[3];
 
-	/* Z = Zx + Zy*i;	Z0 = 0 */
+	// Define the variables for the Zx, Zy, Zx2 and Zy2 values
 	double Zx, Zy;
-	double Zx2, Zy2; /* Zx2 = Zx*Zx;  Zy2 = Zy*Zy  */
-	/*  */
+	double Zx2, Zy2;
+	
+	// Define the variables to keep track of the Iteration and Iteration Max
 	int Iteration;
 	const int IterationMax = 2000; // default
 
@@ -81,7 +90,7 @@ int main()
 	// Define the ppm as an array
 	static unsigned char ppm[sizeOfppm];
 
-		// Calculate CY Values ?? Can optimize
+	// Calculate CY Values
 	double Cy_Ar[sizeof(double) * iYmax];
 	/* compute and write image data bytes to the file */
 	for(iY = 0; iY < iYmax; iY++)
@@ -94,10 +103,10 @@ int main()
 
 	}
 
-	// Calculate CY Values ?? Can optimize
-	double Cx_A[sizeof(double) * iXmax];
+	// Calculate Cx Values
+	double Cx_Ar[sizeof(double) * iXmax];
 	for(iX = 0; iX < iXmax; iX++){
-		Cx_A[iX] = CxMin + (iX * PixelWidth);
+		Cx_Ar[iX] = CxMin + (iX * PixelWidth);
 	}
 
 	// Get current clock time (to measure the multiplication time only).
@@ -125,7 +134,7 @@ int main()
 			for(Iteration = 0; Iteration < IterationMax && ((Zx2 + Zy2) < ER2); Iteration++)
 			{
 				Zy = (2 * Zx * Zy) + Cy_Ar[iY];
-				Zx = Zx2 - Zy2 + Cx_A[iX];
+				Zx = Zx2 - Zy2 + Cx_Ar[iX];
 				Zx2 = Zx * Zx;
 				Zy2 = Zy * Zy;
 			};
@@ -160,36 +169,41 @@ int main()
 					color[1] = 255;
 					color[2] = 255;
 				}
-
-
 			}
 
+			// Copy the color into memory
 			memcpy(&ppm[iY * iYmax * 3 + iX * 3],color, 3);
-			
-
-			
+						
 		}
 	}
+	
 	// Get the clock current time again
-	// Subtract end from start to get the CPU time used.
 	endComp = clock();
+	
+	// Subtract end from start to get the CPU time used.
 	cpu_time_used_comp = ((double)(endComp - startComp)) / CLOCKS_PER_SEC;
+	
+	// print to console
 	printf("Mandelbrot computational process time: %lf\n", cpu_time_used_comp);
 
 	/* write color to the file */
 	fwrite(ppm, 1, iXmax * iYmax * 3, fp);
 
+	// Close the file
 	fclose(fp);
 
+	// Print to console
 	printf("Completed Computing Mandelbrot Set.\n");
 	printf("File: %s successfully closed.\n", filename);
 
 	// Get the clock current time again
-	// Subtract end from start to get the CPU time used.
 	endAll = clock();
+	// Subtract end from start to get the CPU time used.
 	cpu_time_used_all = ((double)(endAll - startAll)) / CLOCKS_PER_SEC;
 
+	// Print to console
 	printf("Mandelbrot Overall time: %lf\n", cpu_time_used_all);
 
+	// Return 0
 	return 0;
  }

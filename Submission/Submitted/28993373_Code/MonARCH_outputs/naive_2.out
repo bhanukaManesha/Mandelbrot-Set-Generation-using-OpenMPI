@@ -1,0 +1,36 @@
+Naive : 2 cores
+Run 1
+File: Mandelbrot.ppm successfully opened for writing.
+Computing Mandelbrot Set. Please wait...
+Mandelbrot computational process time: 43.942488
+Completed Computing Mandelbrot Set.
+File: Mandelbrot.ppm successfully closed.
+Mandelbrot total process time: 44.301849
+Run 2
+File: Mandelbrot.ppm successfully opened for writing.
+Computing Mandelbrot Set. Please wait...
+Mandelbrot computational process time: 43.946063
+Completed Computing Mandelbrot Set.
+File: Mandelbrot.ppm successfully closed.
+Mandelbrot total process time: 44.343245
+Run 3
+File: Mandelbrot.ppm successfully opened for writing.
+Computing Mandelbrot Set. Please wait...
+Mandelbrot computational process time: 43.939064
+Completed Computing Mandelbrot Set.
+File: Mandelbrot.ppm successfully closed.
+Mandelbrot total process time: 44.285222
+Run 4
+File: Mandelbrot.ppm successfully opened for writing.
+Computing Mandelbrot Set. Please wait...
+Mandelbrot computational process time: 43.942680
+Completed Computing Mandelbrot Set.
+File: Mandelbrot.ppm successfully closed.
+Mandelbrot total process time: 44.241697
+Run 5
+File: Mandelbrot.ppm successfully opened for writing.
+Computing Mandelbrot Set. Please wait...
+Mandelbrot computational process time: 43.944773
+Completed Computing Mandelbrot Set.
+File: Mandelbrot.ppm successfully closed.
+Mandelbrot total process time: 44.330838

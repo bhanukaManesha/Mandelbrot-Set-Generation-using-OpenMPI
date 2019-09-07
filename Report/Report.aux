@@ -1,90 +1,125 @@
 \relax 
+\citation{bernstein1996analysis}
+\citation{amdahl1967validity}
+\citation{openmpi}
 \citation{Mandelbrotset}
+\citation{lamb_2017}
+\citation{Iencryption}
+\citation{alia2007new}
+\citation{agarwal2017symmetric}
 \citation{bernstein1996analysis}
-\citation{}
-\citation{bernstein1996analysis}
-\citation{Feautrier2011}
+\citation{amdahl1967validity}
+\citation{openmpi}
+\citation{rosettacode}
+\citation{rosettacode}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}\protected@file@percent }
 \newlabel{MandelbrotEq}{{1}{1}}
 \newlabel{MandelPixel}{{2}{1}}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Preliminary Analysis}{1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-A}}Parallelizability of the Generation of Mandelbrot Set}{1}\protected@file@percent }
-\newlabel{anti independency}{{3}{1}}
-\newlabel{flow independency}{{4}{1}}
-\newlabel{output independency}{{5}{1}}
-\newlabel{I1}{{6}{1}}
-\newlabel{O1}{{7}{1}}
-\newlabel{I2}{{8}{1}}
-\newlabel{O2}{{9}{1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-B}}Theoretical Speed Up of the Generation of Mandelbrot Set}{2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Mandelbrot Set generated using Boolean Escape Time algorithm\cite  {rosettacode}\relax }}{1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{Mandel}{{1}{1}}
+\citation{bernstein1996analysis}
+\citation{Feautrier2011}
+\citation{amdahl1967validity}
+\citation{gustafson1988reevaluating}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Preliminary Analysis}{2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-A}}Data Parallelizability of the Generation of the Mandelbrot Set}{2}\protected@file@percent }
+\newlabel{anti independency}{{3}{2}}
+\newlabel{flow independency}{{4}{2}}
+\newlabel{output independency}{{5}{2}}
+\newlabel{I1}{{6}{2}}
+\newlabel{O1}{{7}{2}}
+\newlabel{I2}{{8}{2}}
+\newlabel{O2}{{9}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-B}}Theoretical Speed Up of the Generation of the Mandelbrot Set}{2}\protected@file@percent }
 \newlabel{Theo}{{\unhbox \voidb@x \hbox {II-B}}{2}}
 \newlabel{rp}{{13}{2}}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Number of tasks vs Speed up factor\relax }}{2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {III}Design of Partition Schemes}{2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Number of tasks vs Theoretical Speed up factor\relax }}{2}\protected@file@percent }
+\newlabel{theoratical}{{I}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Design of the Partition Schemes}{2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Naive : Row Based Partition Scheme }{2}\protected@file@percent }
 \newlabel{Naive}{{\unhbox \voidb@x \hbox {III-A}}{2}}
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{Partition}{{\caption@xref {Partition}{ on input line 190}}{2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Partition Schemes when $N=4$ \relax }}{2}\protected@file@percent }
-\newlabel{rowsPerTask}{{17}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}First Come First Served : Row Based Partition Scheme}{2}\protected@file@percent }
-\newlabel{FCFS}{{\unhbox \voidb@x \hbox {III-B}}{2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Technical Flowchart for Na\IeC {\"\i }ve Row Based Partition Scheme\relax }}{3}\protected@file@percent }
-\newlabel{Naive_1}{{2}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-C}}Alternating : Row Based Partition Scheme}{3}\protected@file@percent }
-\newlabel{Alternating}{{\unhbox \voidb@x \hbox {III-C}}{3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Technical Flowchart for First Come First Served Row Based Partition Scheme\relax }}{3}\protected@file@percent }
-\newlabel{FCFS_i}{{3}{3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Technical Flowchart for Alternative Row Based Partition Scheme\relax }}{3}\protected@file@percent }
-\newlabel{Alte}{{4}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Partition Schemes when $N=4$ \relax }}{3}\protected@file@percent }
+\newlabel{Partition}{{2}{3}}
+\newlabel{stp}{{15}{3}}
+\newlabel{etp}{{16}{3}}
+\newlabel{rowsPerTask}{{17}{3}}
+\newlabel{rem}{{18}{3}}
+\newlabel{naive_m}{{19}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Technical Flowchart for Na\IeC {\"\i }ve Row Based Partition Scheme\relax }}{3}\protected@file@percent }
+\newlabel{Naive_1}{{3}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}First Come First Served : Row Based Partition Scheme}{3}\protected@file@percent }
+\newlabel{FCFS}{{\unhbox \voidb@x \hbox {III-B}}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Technical Flowchart for First Come First Served Row Based Partition Scheme\relax }}{4}\protected@file@percent }
+\newlabel{FCFS_i}{{4}{4}}
+\newlabel{fcfs_m}{{20}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-C}}Alternating : Row Based Partition Scheme}{4}\protected@file@percent }
+\newlabel{Alternating}{{\unhbox \voidb@x \hbox {III-C}}{4}}
+\citation{mon}
+\newlabel{al_m}{{21}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Technical Flowchart for Alternative Row Based Partition Scheme\relax }}{5}\protected@file@percent }
+\newlabel{Alte}{{5}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Methodology}{5}\protected@file@percent }
+\newlabel{TEST}{{IV}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Results and Discussions}{5}\protected@file@percent }
+\newlabel{actualvst}{{22}{5}}
+\newlabel{percen}{{23}{5}}
 \citation{ristov2016superlinear}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Test Methodology}{4}\protected@file@percent }
-\newlabel{TEST}{{IV}{4}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Results and Discussions}{4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Theoretical Speed-up vs Actual Speed-up}{4}\protected@file@percent }
-\newlabel{naiveres}{{\unhbox \voidb@x \hbox {V-A}1}{4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-A}1}Naive - Row Based Partition Scheme }{4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-A}2}First Come First Served - Row Based Partition Scheme}{4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-A}3}Alternating - Row Based Partition Scheme}{4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Actual Speed-up between each partition scheme}{4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-B}1}Na\IeC {\"\i }ve - Row Based Partition Scheme }{4}\protected@file@percent }
-\newlabel{fcfsex}{{\unhbox \voidb@x \hbox {V-B}2}{4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-B}2}First Come First Served - Row Based Partition Scheme}{4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Analysis of Theoretical Speedup vs Actual Speedup\relax }}{6}\protected@file@percent }
+\newlabel{ac}{{IIa}{6}}
+\newlabel{sub@ac}{{(a)}{a}}
+\newlabel{pd}{{IIb}{6}}
+\newlabel{sub@pd}{{(b)}{b}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(a)}{\ignorespaces {Theoretical Speedup vs Actual Speedup of all the partition schemes}}}{6}\protected@file@percent }
+\@writefile{lot}{\contentsline {subtable}{\numberline{(b)}{\ignorespaces {Percentage Difference of all the partition schemes}}}{6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Plots for Theoretical Speedup vs Actual Speedup\relax }}{6}\protected@file@percent }
+\newlabel{dpd}{{6b}{6}}
+\newlabel{sub@dpd}{{(b)}{b}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Theoretical Speedup vs Actual Speedup}}}{6}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Percentage Difference}}}{6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Theoretical Speed up vs Actual Speed up}{6}\protected@file@percent }
+\newlabel{naiveres}{{\unhbox \voidb@x \hbox {V-A}1}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-A}1}Naive - Row Based Partition Scheme }{6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-A}2}First Come First Served - Row Based Partition Scheme}{6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-A}3}Alternating - Row Based Partition Scheme}{6}\protected@file@percent }
 \bibstyle{IEEEtran}
 \bibdata{ref.bib}
-\bibcite{Mandelbrotset}{1}
-\bibcite{bernstein1996analysis}{2}
-\bibcite{Feautrier2011}{3}
-\bibcite{ristov2016superlinear}{4}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Analysis of Theoretical Speedup vs Actual Speedup\relax }}{5}\protected@file@percent }
-\newlabel{ac}{{IIa}{5}}
-\newlabel{sub@ac}{{(a)}{a}}
-\newlabel{pd}{{IIb}{5}}
-\newlabel{sub@pd}{{(b)}{b}}
-\@writefile{lot}{\contentsline {subtable}{\numberline{(a)}{\ignorespaces {Theoretical Speedup vs Actual Speedup of all the partition schemes}}}{5}\protected@file@percent }
-\@writefile{lot}{\contentsline {subtable}{\numberline{(b)}{\ignorespaces {Percentage Difference of all the partition schemes}}}{5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Plots for Theoretical Speedup vs Actual Speedup\relax }}{5}\protected@file@percent }
-\newlabel{dpd}{{5b}{5}}
-\newlabel{sub@dpd}{{(b)}{b}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Theoretical Speedup vs Actual Speedup}}}{5}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Percentage Difference}}}{5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-B}3}Alternating - Row Based Partition Scheme}{5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Future Work}{5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{References}{5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{Appendix}{6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Property profile of the diverse library compared to the compound pool.\relax }}{6}\protected@file@percent }
-\newlabel{fig:PropProf}{{6}{6}}
-\newlabel{16job}{{1}{7}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}MonARCH job script for 16 cores}{7}\protected@file@percent }
-\newlabel{32job}{{2}{7}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}MonARCH job script for 32 cores}{7}\protected@file@percent }
-\newlabel{RF1}{8}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Test Results : Na\IeC {\"\i }ve Row Based Segmentation\relax }}{8}\protected@file@percent }
-\newlabel{fig:PropProf}{{7}{8}}
-\newlabel{RF2}{9}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Test Results : First Come First Served Row Based Segmentation\relax }}{9}\protected@file@percent }
-\newlabel{fig:PropProf}{{8}{9}}
-\newlabel{RF3}{10}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Test Results : Alternating Row Based Segmentation.\relax }}{10}\protected@file@percent }
-\newlabel{fig:PropProf}{{9}{10}}
+\bibcite{bernstein1996analysis}{1}
+\bibcite{amdahl1967validity}{2}
+\bibcite{openmpi}{3}
+\bibcite{Mandelbrotset}{4}
+\bibcite{lamb_2017}{5}
+\bibcite{Iencryption}{6}
+\bibcite{alia2007new}{7}
+\bibcite{agarwal2017symmetric}{8}
+\bibcite{rosettacode}{9}
+\bibcite{Feautrier2011}{10}
+\bibcite{gustafson1988reevaluating}{11}
+\bibcite{mon}{12}
+\bibcite{ristov2016superlinear}{13}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Actual Speed up between each Partition Scheme}{7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-B}1}Na\IeC {\"\i }ve - Row Based Partition Scheme }{7}\protected@file@percent }
+\newlabel{fcfsex}{{\unhbox \voidb@x \hbox {V-B}2}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-B}2}First Come First Served - Row Based Partition Scheme}{7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-B}3}Alternating - Row Based Partition Scheme}{7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Future Work}{7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Appendix}{8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Test Results : Computation vs Total Time for Serial Generation\relax }}{8}\protected@file@percent }
+\newlabel{app:amdal}{{7}{8}}
+\newlabel{32out}{{1}{8}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Sample MonARCH output file for 32 cores}{8}\protected@file@percent }
+\newlabel{16job}{{2}{9}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}MonARCH job script for 16 cores}{9}\protected@file@percent }
+\newlabel{32job}{{3}{9}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}MonARCH job script for 32 cores}{9}\protected@file@percent }
+\newlabel{RF1}{10}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Test Results : Na\IeC {\"\i }ve Row Based Segmentation\relax }}{10}\protected@file@percent }
+\newlabel{app:n}{{8}{10}}
+\newlabel{RF2}{11}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Test Results : First Come First Served Row Based Segmentation\relax }}{11}\protected@file@percent }
+\newlabel{app:f}{{9}{11}}
+\newlabel{RF3}{12}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Test Results : Alternating Row Based Segmentation.\relax }}{12}\protected@file@percent }
+\newlabel{app:a}{{10}{12}}
